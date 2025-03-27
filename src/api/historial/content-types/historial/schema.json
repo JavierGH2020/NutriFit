@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "historials",
+  "info": {
+    "singularName": "historial",
+    "pluralName": "historials",
+    "displayName": "historial",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fecha": {
+      "type": "date"
+    },
+    "repeticiones": {
+      "type": "integer"
+    },
+    "pesoUtilizado": {
+      "type": "decimal"
+    },
+    "duracion": {
+      "type": "decimal"
+    },
+    "nombreEjercicio": {
+      "type": "string"
+    },
+    "usuario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::usuario.usuario",
+      "inversedBy": "historials"
+    },
+    "alimento": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::alimento.alimento",
+      "inversedBy": "historials"
+    },
+    "ejercicio": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ejercicio.ejercicio",
+      "inversedBy": "historials"
+    }
+  }
+}

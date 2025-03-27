@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "alimentos",
+  "info": {
+    "singularName": "alimento",
+    "pluralName": "alimentos",
+    "displayName": "alimento",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "calorias": {
+      "type": "biginteger"
+    },
+    "proteina": {
+      "type": "integer"
+    },
+    "carbohidratos": {
+      "type": "integer"
+    },
+    "grasa": {
+      "type": "integer"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "Carne",
+        "Cereal",
+        "Fruta",
+        "Verdura",
+        "Liquido"
+      ]
+    },
+    "azucar": {
+      "type": "integer"
+    },
+    "usuario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::usuario.usuario",
+      "inversedBy": "alimentos"
+    },
+    "historials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::historial.historial",
+      "mappedBy": "alimento"
+    }
+  }
+}

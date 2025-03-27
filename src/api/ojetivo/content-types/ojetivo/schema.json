@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ojetivos",
+  "info": {
+    "singularName": "ojetivo",
+    "pluralName": "ojetivos",
+    "displayName": "ojetivo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "entrenamientosSemanales": {
+      "type": "integer"
+    },
+    "intensidad": {
+      "type": "enumeration",
+      "enum": [
+        "principiante",
+        "intermedio",
+        "avanzado"
+      ]
+    }
+  }
+}
