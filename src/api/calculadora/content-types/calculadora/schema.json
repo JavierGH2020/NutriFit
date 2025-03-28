@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "calculadoras",
+  "info": {
+    "singularName": "calculadora",
+    "pluralName": "calculadoras",
+    "displayName": "calculadora"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "peso": {
+      "type": "decimal"
+    },
+    "altura": {
+      "type": "decimal"
+    },
+    "edad": {
+      "type": "integer"
+    },
+    "genero": {
+      "type": "enumeration",
+      "enum": [
+        "hombre",
+        "mujer"
+      ]
+    }
+  }
+}

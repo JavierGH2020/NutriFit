@@ -35,11 +35,10 @@
     "tipo": {
       "type": "enumeration",
       "enum": [
-        "Carne",
-        "Cereal",
-        "Fruta",
-        "Verdura",
-        "Liquido"
+        "desayuno",
+        "almuerzo",
+        "cena",
+        "snack"
       ]
     },
     "azucar": {
