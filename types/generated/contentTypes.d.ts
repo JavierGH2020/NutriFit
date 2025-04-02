@@ -386,13 +386,13 @@ export interface ApiAlimentoAlimento extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    azucar: Schema.Attribute.Integer;
     calorias: Schema.Attribute.BigInteger;
     carbohidratos: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    grasa: Schema.Attribute.Integer;
+    fecha: Schema.Attribute.Date;
+    grasas: Schema.Attribute.Integer;
     historials: Schema.Attribute.Relation<
       'oneToMany',
       'api::historial.historial'
@@ -403,7 +403,7 @@ export interface ApiAlimentoAlimento extends Struct.CollectionTypeSchema {
       'api::alimento.alimento'
     >;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    proteina: Schema.Attribute.Integer;
+    proteinas: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     tipo: Schema.Attribute.Enumeration<
       ['desayuno', 'almuerzo', 'cena', 'snack']
@@ -411,7 +411,10 @@ export interface ApiAlimentoAlimento extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    usuario: Schema.Attribute.Relation<'manyToOne', 'api::usuario.usuario'>;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -463,14 +466,9 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    caloriasQuemadas: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    descripcion: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
     historials: Schema.Attribute.Relation<
       'oneToMany',
       'api::historial.historial'
@@ -484,12 +482,28 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
       'api::ejercicio.ejercicio'
     >;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    peso: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
-    tipo: Schema.Attribute.Enumeration<['Cardio', 'Fuerza', 'HIT']>;
+    repeticiones: Schema.Attribute.Integer;
+    series: Schema.Attribute.Integer;
+    tipo: Schema.Attribute.Enumeration<
+      [
+        'pecho',
+        'espalda',
+        'piernas',
+        'hombros',
+        'brazos',
+        'abdominales',
+        'cardio',
+      ]
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    usuario: Schema.Attribute.Relation<'manyToOne', 'api::usuario.usuario'>;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -528,13 +542,13 @@ export interface ApiHistorialHistorial extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    usuario: Schema.Attribute.Relation<'manyToOne', 'api::usuario.usuario'>;
   };
 }
 
 export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
   collectionName: 'ojetivos';
   info: {
+    description: '';
     displayName: 'ojetivo';
     pluralName: 'ojetivos';
     singularName: 'ojetivo';
@@ -547,6 +561,7 @@ export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     entrenamientosSemanales: Schema.Attribute.Integer;
+    fechaLimite: Schema.Attribute.Date;
     intensidad: Schema.Attribute.Enumeration<
       ['principiante', 'intermedio', 'avanzado']
     >;
@@ -556,10 +571,18 @@ export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
       'api::ojetivo.ojetivo'
     > &
       Schema.Attribute.Private;
+    pesoDeseado: Schema.Attribute.Decimal;
+    plan: Schema.Attribute.Enumeration<
+      ['perder grasa', 'ganar musculo', 'tonificar', 'bajar de peso']
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -567,7 +590,7 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   collectionName: 'usuarios';
   info: {
     description: '';
-    displayName: 'usuario';
+    displayName: 'datoUsuario';
     pluralName: 'usuarios';
     singularName: 'usuario';
   };
@@ -575,26 +598,12 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    alimentos: Schema.Attribute.Relation<'oneToMany', 'api::alimento.alimento'>;
     altura: Schema.Attribute.Integer;
-    apellido: Schema.Attribute.String;
-    contrasena: Schema.Attribute.Password & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     edad: Schema.Attribute.Integer;
-    ejercicios: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::ejercicio.ejercicio'
-    >;
-    email: Schema.Attribute.Email &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
     genero: Schema.Attribute.Enumeration<['hombre', 'mujer']>;
-    historials: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::historial.historial'
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -602,17 +611,15 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     nivelActividad: Schema.Attribute.Enumeration<['bajo', 'medio', 'alto']>;
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
     peso: Schema.Attribute.Decimal;
-    plan: Schema.Attribute.Enumeration<
-      ['perder grasa', 'ganar musculo', 'tonificar', 'bajar de peso']
-    >;
     publishedAt: Schema.Attribute.DateTime;
-    rol: Schema.Attribute.Enumeration<['public', 'admin']> &
-      Schema.Attribute.DefaultTo<'public'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1071,15 +1078,23 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
+    alimentos: Schema.Attribute.Relation<'oneToMany', 'api::alimento.alimento'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dato_usuarios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::usuario.usuario'
+    >;
+    ejercicios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ejercicio.ejercicio'
+    >;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1091,6 +1106,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    ojetivos: Schema.Attribute.Relation<'oneToMany', 'api::ojetivo.ojetivo'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{

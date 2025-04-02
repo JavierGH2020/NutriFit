@@ -4,29 +4,13 @@
   "info": {
     "singularName": "usuario",
     "pluralName": "usuarios",
-    "displayName": "usuario",
+    "displayName": "datoUsuario",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "nombre": {
-      "type": "string",
-      "required": true
-    },
-    "apellido": {
-      "type": "string"
-    },
-    "email": {
-      "type": "email",
-      "required": true,
-      "unique": true
-    },
-    "contrasena": {
-      "type": "password",
-      "required": true
-    },
     "edad": {
       "type": "integer"
     },
@@ -51,40 +35,11 @@
         "alto"
       ]
     },
-    "rol": {
-      "type": "enumeration",
-      "enum": [
-        "public",
-        "admin"
-      ],
-      "default": "public"
-    },
-    "plan": {
-      "type": "enumeration",
-      "enum": [
-        "perder grasa",
-        "ganar musculo",
-        "tonificar",
-        "bajar de peso"
-      ]
-    },
-    "alimentos": {
+    "user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::alimento.alimento",
-      "mappedBy": "usuario"
-    },
-    "ejercicios": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::ejercicio.ejercicio",
-      "mappedBy": "usuario"
-    },
-    "historials": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::historial.historial",
-      "mappedBy": "usuario"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "dato_usuarios"
     }
   }
 }

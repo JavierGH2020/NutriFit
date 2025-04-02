@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ojetivo",
     "pluralName": "ojetivos",
-    "displayName": "ojetivo"
+    "displayName": "ojetivo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,27 @@
         "intermedio",
         "avanzado"
       ]
+    },
+    "pesoDeseado": {
+      "type": "decimal"
+    },
+    "fechaLimite": {
+      "type": "date"
+    },
+    "plan": {
+      "type": "enumeration",
+      "enum": [
+        "perder grasa",
+        "ganar musculo",
+        "tonificar",
+        "bajar de peso"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "ojetivos"
     }
   }
 }

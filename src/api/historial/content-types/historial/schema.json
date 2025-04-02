@@ -26,12 +26,6 @@
     "nombreEjercicio": {
       "type": "string"
     },
-    "usuario": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::usuario.usuario",
-      "inversedBy": "historials"
-    },
     "alimento": {
       "type": "relation",
       "relation": "manyToOne",
