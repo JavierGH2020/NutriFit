@@ -582,13 +582,13 @@ export interface ApiHistorialHistorial extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
-  collectionName: 'ojetivos';
+export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
+  collectionName: 'objetivos';
   info: {
     description: '';
-    displayName: 'ojetivo';
-    pluralName: 'ojetivos';
-    singularName: 'ojetivo';
+    displayName: 'objetivo';
+    pluralName: 'objetivos';
+    singularName: 'objetivo';
   };
   options: {
     draftAndPublish: true;
@@ -605,7 +605,7 @@ export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::ojetivo.ojetivo'
+      'api::objetivo.objetivo'
     > &
       Schema.Attribute.Private;
     pesoDeseado: Schema.Attribute.Decimal;
@@ -1192,7 +1192,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
-    ojetivos: Schema.Attribute.Relation<'oneToMany', 'api::ojetivo.ojetivo'>;
+    objetivos: Schema.Attribute.Relation<'oneToMany', 'api::objetivo.objetivo'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1233,7 +1233,7 @@ declare module '@strapi/strapi' {
       'api::ejercicio-rutina.ejercicio-rutina': ApiEjercicioRutinaEjercicioRutina;
       'api::ejercicio.ejercicio': ApiEjercicioEjercicio;
       'api::historial.historial': ApiHistorialHistorial;
-      'api::ojetivo.ojetivo': ApiOjetivoOjetivo;
+      'api::objetivo.objetivo': ApiObjetivoObjetivo;
       'api::rutina.rutina': ApiRutinaRutina;
       'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;

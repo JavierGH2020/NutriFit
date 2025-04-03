@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "ojetivos",
+  "collectionName": "objetivos",
   "info": {
-    "singularName": "ojetivo",
-    "pluralName": "ojetivos",
-    "displayName": "ojetivo",
+    "singularName": "objetivo",
+    "pluralName": "objetivos",
+    "displayName": "objetivo",
     "description": ""
   },
   "options": {
@@ -41,7 +41,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "ojetivos"
+      "inversedBy": "objetivos"
     }
   }
 }

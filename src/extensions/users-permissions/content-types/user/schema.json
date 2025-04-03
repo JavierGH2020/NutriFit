@@ -83,10 +83,10 @@
       "target": "api::ejercicio.ejercicio",
       "mappedBy": "user"
     },
-    "ojetivos": {
+    "objetivos": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::ojetivo.ojetivo",
+      "target": "api::objetivo.objetivo",
       "mappedBy": "user"
     },
     "rutinas": {
