@@ -4,7 +4,8 @@
   "info": {
     "singularName": "calculadora",
     "pluralName": "calculadoras",
-    "displayName": "calculadora"
+    "displayName": "calculadora",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,12 @@
         "hombre",
         "mujer"
       ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "calculadoras"
     }
   }
 }

@@ -94,6 +94,12 @@
       "relation": "oneToMany",
       "target": "api::rutina.rutina",
       "mappedBy": "users_permissions_user"
+    },
+    "calculadoras": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::calculadora.calculadora",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

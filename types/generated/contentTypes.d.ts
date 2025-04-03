@@ -421,6 +421,7 @@ export interface ApiAlimentoAlimento extends Struct.CollectionTypeSchema {
 export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
   collectionName: 'calculadoras';
   info: {
+    description: '';
     displayName: 'calculadora';
     pluralName: 'calculadoras';
     singularName: 'calculadora';
@@ -446,6 +447,10 @@ export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1168,6 +1173,10 @@ export interface PluginUsersPermissionsUser
   attributes: {
     alimentos: Schema.Attribute.Relation<'oneToMany', 'api::alimento.alimento'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    calculadoras: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::calculadora.calculadora'
+    >;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
