@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rutinas",
+  "info": {
+    "singularName": "rutina",
+    "pluralName": "rutinas",
+    "displayName": "Rutina",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "diasSemana": {
+      "type": "enumeration",
+      "enum": [
+        "lunes",
+        "martes",
+        "miércoles",
+        "jueves",
+        "viernes",
+        "sábado",
+        "domingo"
+      ],
+      "multiple": true
+    },
+    "ejercicios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ejercicio-rutina.ejercicio-rutina"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "rutinas"
+    }
+  }
+}

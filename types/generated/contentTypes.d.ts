@@ -449,6 +449,43 @@ export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEjercicioRutinaEjercicioRutina
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'ejercicio_rutinas';
+  info: {
+    displayName: 'EjercicioRutina';
+    pluralName: 'ejercicio-rutinas';
+    singularName: 'ejercicio-rutina';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descanso: Schema.Attribute.Integer;
+    ejercicio: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::ejercicio.ejercicio'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ejercicio-rutina.ejercicio-rutina'
+    > &
+      Schema.Attribute.Private;
+    orden: Schema.Attribute.Integer;
+    peso: Schema.Attribute.Float;
+    publishedAt: Schema.Attribute.DateTime;
+    repeticiones: Schema.Attribute.Integer;
+    series: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
   collectionName: 'ejercicios';
   info: {
@@ -580,6 +617,55 @@ export interface ApiOjetivoOjetivo extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
+  collectionName: 'rutinas';
+  info: {
+    description: '';
+    displayName: 'Rutina';
+    pluralName: 'rutinas';
+    singularName: 'rutina';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descripcion: Schema.Attribute.Text;
+    diasSemana: Schema.Attribute.Enumeration<
+      [
+        'lunes',
+        'martes',
+        'mi\u00E9rcoles',
+        'jueves',
+        'viernes',
+        's\u00E1bado',
+        'domingo',
+      ]
+    >;
+    ejercicios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ejercicio-rutina.ejercicio-rutina'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rutina.rutina'
+    > &
+      Schema.Attribute.Private;
+    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -1119,6 +1205,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    rutinas: Schema.Attribute.Relation<'oneToMany', 'api::rutina.rutina'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1143,9 +1230,11 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::alimento.alimento': ApiAlimentoAlimento;
       'api::calculadora.calculadora': ApiCalculadoraCalculadora;
+      'api::ejercicio-rutina.ejercicio-rutina': ApiEjercicioRutinaEjercicioRutina;
       'api::ejercicio.ejercicio': ApiEjercicioEjercicio;
       'api::historial.historial': ApiHistorialHistorial;
       'api::ojetivo.ojetivo': ApiOjetivoOjetivo;
+      'api::rutina.rutina': ApiRutinaRutina;
       'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
