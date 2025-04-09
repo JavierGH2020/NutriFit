@@ -4,28 +4,32 @@
   "info": {
     "singularName": "usuario",
     "pluralName": "usuarios",
-    "displayName": "datoUsuario",
-    "description": ""
+    "displayName": "DatoUsuario",
+    "description": "Datos adicionales del usuario"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "edad": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "genero": {
       "type": "enumeration",
       "enum": [
         "hombre",
         "mujer"
-      ]
+      ],
+      "required": true
     },
     "peso": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "altura": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "nivelActividad": {
       "type": "enumeration",
@@ -33,9 +37,10 @@
         "bajo",
         "medio",
         "alto"
-      ]
+      ],
+      "required": true
     },
-    "user": {
+    "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",

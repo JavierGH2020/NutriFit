@@ -27,6 +27,14 @@
         "mujer"
       ]
     },
+    "categoria": {
+      "type": "string",
+      "required": false
+    },
+    "imc": {
+      "type": "decimal",
+      "required": false
+    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",

@@ -431,11 +431,13 @@ export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
   };
   attributes: {
     altura: Schema.Attribute.Decimal;
+    categoria: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     edad: Schema.Attribute.Integer;
     genero: Schema.Attribute.Enumeration<['hombre', 'mujer']>;
+    imc: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -451,43 +453,6 @@ export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-  };
-}
-
-export interface ApiEjercicioRutinaEjercicioRutina
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'ejercicio_rutinas';
-  info: {
-    displayName: 'EjercicioRutina';
-    pluralName: 'ejercicio-rutinas';
-    singularName: 'ejercicio-rutina';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    descanso: Schema.Attribute.Integer;
-    ejercicio: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::ejercicio.ejercicio'
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::ejercicio-rutina.ejercicio-rutina'
-    > &
-      Schema.Attribute.Private;
-    orden: Schema.Attribute.Integer;
-    peso: Schema.Attribute.Float;
-    publishedAt: Schema.Attribute.DateTime;
-    repeticiones: Schema.Attribute.Integer;
-    series: Schema.Attribute.Integer;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -511,12 +476,13 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    fecha: Schema.Attribute.Date;
     historials: Schema.Attribute.Relation<
       'oneToMany',
       'api::historial.historial'
     >;
     intensidad: Schema.Attribute.Enumeration<
-      ['Pricipiante', 'Intermedio', 'Avanzado']
+      ['pricipiante', 'intermedio', 'avanzado']
     >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
@@ -631,7 +597,7 @@ export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
 export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
   collectionName: 'rutinas';
   info: {
-    description: '';
+    description: 'A collection of workout routines for users.';
     displayName: 'Rutina';
     pluralName: 'rutinas';
     singularName: 'rutina';
@@ -644,20 +610,10 @@ export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     descripcion: Schema.Attribute.Text;
-    diasSemana: Schema.Attribute.Enumeration<
-      [
-        'lunes',
-        'martes',
-        'mi\u00E9rcoles',
-        'jueves',
-        'viernes',
-        's\u00E1bado',
-        'domingo',
-      ]
-    >;
+    diasSemana: Schema.Attribute.Enumeration<['uno', 'dos', 'tres']>;
     ejercicios: Schema.Attribute.Relation<
       'oneToMany',
-      'api::ejercicio-rutina.ejercicio-rutina'
+      'api::ejercicio.ejercicio'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -680,34 +636,36 @@ export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
 export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   collectionName: 'usuarios';
   info: {
-    description: '';
-    displayName: 'datoUsuario';
+    description: 'Datos adicionales del usuario';
+    displayName: 'DatoUsuario';
     pluralName: 'usuarios';
     singularName: 'usuario';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    altura: Schema.Attribute.Integer;
+    altura: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    edad: Schema.Attribute.Integer;
-    genero: Schema.Attribute.Enumeration<['hombre', 'mujer']>;
+    edad: Schema.Attribute.Integer & Schema.Attribute.Required;
+    genero: Schema.Attribute.Enumeration<['hombre', 'mujer']> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::usuario.usuario'
     > &
       Schema.Attribute.Private;
-    nivelActividad: Schema.Attribute.Enumeration<['bajo', 'medio', 'alto']>;
-    peso: Schema.Attribute.Decimal;
+    nivelActividad: Schema.Attribute.Enumeration<['bajo', 'medio', 'alto']> &
+      Schema.Attribute.Required;
+    peso: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
+    users_permissions_user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -1239,7 +1197,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::alimento.alimento': ApiAlimentoAlimento;
       'api::calculadora.calculadora': ApiCalculadoraCalculadora;
-      'api::ejercicio-rutina.ejercicio-rutina': ApiEjercicioRutinaEjercicioRutina;
       'api::ejercicio.ejercicio': ApiEjercicioEjercicio;
       'api::historial.historial': ApiHistorialHistorial;
       'api::objetivo.objetivo': ApiObjetivoObjetivo;

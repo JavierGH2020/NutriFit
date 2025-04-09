@@ -35,9 +35,9 @@
     "intensidad": {
       "type": "enumeration",
       "enum": [
-        "Pricipiante",
-        "Intermedio",
-        "Avanzado"
+        "pricipiante",
+        "intermedio",
+        "avanzado"
       ]
     },
     "historials": {
@@ -60,6 +60,9 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "ejercicios"
+    },
+    "fecha": {
+      "type": "date"
     }
   }
 }

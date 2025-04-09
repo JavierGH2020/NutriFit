@@ -5,7 +5,7 @@
     "singularName": "rutina",
     "pluralName": "rutinas",
     "displayName": "Rutina",
-    "description": ""
+    "description": "A collection of workout routines for users."
   },
   "options": {
     "draftAndPublish": false
@@ -16,25 +16,21 @@
       "required": true
     },
     "descripcion": {
-      "type": "text"
+      "type": "text",
+      "required": false
     },
     "diasSemana": {
       "type": "enumeration",
       "enum": [
-        "lunes",
-        "martes",
-        "miércoles",
-        "jueves",
-        "viernes",
-        "sábado",
-        "domingo"
-      ],
-      "multiple": true
+        "uno",
+        "dos",
+        "tres"
+      ]
     },
     "ejercicios": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::ejercicio-rutina.ejercicio-rutina"
+      "target": "api::ejercicio.ejercicio"
     },
     "users_permissions_user": {
       "type": "relation",
