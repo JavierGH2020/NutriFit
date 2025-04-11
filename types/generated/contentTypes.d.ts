@@ -476,6 +476,7 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    descanso: Schema.Attribute.Integer;
     fecha: Schema.Attribute.Date;
     historials: Schema.Attribute.Relation<
       'oneToMany',
@@ -570,9 +571,7 @@ export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     entrenamientosSemanales: Schema.Attribute.Integer;
     fechaLimite: Schema.Attribute.Date;
-    intensidad: Schema.Attribute.Enumeration<
-      ['principiante', 'intermedio', 'avanzado']
-    >;
+    intensidad: Schema.Attribute.Enumeration<['baja', 'media', 'alta']>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -581,7 +580,7 @@ export interface ApiObjetivoObjetivo extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     pesoDeseado: Schema.Attribute.Decimal;
     plan: Schema.Attribute.Enumeration<
-      ['perder grasa', 'ganar musculo', 'tonificar', 'bajar de peso']
+      ['mantenimiento', 'perdida', 'ganancia', 'rendimiento']
     >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -1066,7 +1065,7 @@ export interface PluginUsersPermissionsRole
   extends Struct.CollectionTypeSchema {
   collectionName: 'up_roles';
   info: {
-    description: '';
+    description: 'Defines the roles for user permissions in the application.';
     displayName: 'Role';
     name: 'role';
     pluralName: 'roles';
@@ -1077,17 +1076,17 @@ export interface PluginUsersPermissionsRole
   };
   pluginOptions: {
     'content-manager': {
-      visible: false;
+      visible: true;
     };
     'content-type-builder': {
-      visible: false;
+      visible: true;
     };
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.String & Schema.Attribute.Configurable;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1096,15 +1095,19 @@ export interface PluginUsersPermissionsRole
       Schema.Attribute.Private;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.Configurable &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
     permissions: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.permission'
-    >;
+    > &
+      Schema.Attribute.Configurable;
     publishedAt: Schema.Attribute.DateTime;
-    type: Schema.Attribute.String & Schema.Attribute.Unique;
+    type: Schema.Attribute.String &
+      Schema.Attribute.Unique &
+      Schema.Attribute.Configurable;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1171,7 +1174,8 @@ export interface PluginUsersPermissionsUser
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
-    >;
+    > &
+      Schema.Attribute.Configurable;
     rutinas: Schema.Attribute.Relation<'oneToMany', 'api::rutina.rutina'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

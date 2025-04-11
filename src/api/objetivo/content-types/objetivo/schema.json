@@ -17,9 +17,9 @@
     "intensidad": {
       "type": "enumeration",
       "enum": [
-        "principiante",
-        "intermedio",
-        "avanzado"
+        "baja",
+        "media",
+        "alta"
       ]
     },
     "pesoDeseado": {
@@ -31,10 +31,10 @@
     "plan": {
       "type": "enumeration",
       "enum": [
-        "perder grasa",
-        "ganar musculo",
-        "tonificar",
-        "bajar de peso"
+        "mantenimiento",
+        "perdida",
+        "ganancia",
+        "rendimiento"
       ]
     },
     "user": {
