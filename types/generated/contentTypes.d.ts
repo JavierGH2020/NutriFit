@@ -386,7 +386,7 @@ export interface ApiAlimentoAlimento extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    calorias: Schema.Attribute.BigInteger;
+    calorias: Schema.Attribute.Decimal;
     carbohidratos: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -449,7 +449,7 @@ export interface ApiCalculadoraCalculadora extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -483,7 +483,7 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
       'api::historial.historial'
     >;
     intensidad: Schema.Attribute.Enumeration<
-      ['pricipiante', 'intermedio', 'avanzado']
+      ['principiante', 'intermedio', 'avanzado']
     >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
@@ -491,10 +491,29 @@ export interface ApiEjercicioEjercicio extends Struct.CollectionTypeSchema {
       'api::ejercicio.ejercicio'
     >;
     nombre: Schema.Attribute.String & Schema.Attribute.Required;
-    peso: Schema.Attribute.Decimal;
+    peso: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     publishedAt: Schema.Attribute.DateTime;
-    repeticiones: Schema.Attribute.Integer;
-    series: Schema.Attribute.Integer;
+    repeticiones: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    rutinas: Schema.Attribute.Relation<'manyToMany', 'api::rutina.rutina'>;
+    series: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     tipo: Schema.Attribute.Enumeration<
       [
         'pecho',
@@ -544,7 +563,6 @@ export interface ApiHistorialHistorial extends Struct.CollectionTypeSchema {
       'api::historial.historial'
     > &
       Schema.Attribute.Private;
-    nombreEjercicio: Schema.Attribute.String;
     pesoUtilizado: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     repeticiones: Schema.Attribute.Integer;
@@ -611,7 +629,7 @@ export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
     descripcion: Schema.Attribute.Text;
     diasSemana: Schema.Attribute.Enumeration<['uno', 'dos', 'tres']>;
     ejercicios: Schema.Attribute.Relation<
-      'oneToMany',
+      'manyToMany',
       'api::ejercicio.ejercicio'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -625,7 +643,7 @@ export interface ApiRutinaRutina extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
@@ -664,7 +682,7 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;

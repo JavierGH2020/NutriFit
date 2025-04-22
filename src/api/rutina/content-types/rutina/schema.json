@@ -29,10 +29,11 @@
     },
     "ejercicios": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::ejercicio.ejercicio"
+      "relation": "manyToMany",
+      "target": "api::ejercicio.ejercicio",
+      "inversedBy": "rutinas"
     },
-    "users_permissions_user": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
