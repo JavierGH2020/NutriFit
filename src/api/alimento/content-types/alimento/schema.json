@@ -21,7 +21,7 @@
       "required": true
     },
     "calorias": {
-      "type": "biginteger"
+      "type": "decimal"
     },
     "proteinas": {
       "type": "integer"

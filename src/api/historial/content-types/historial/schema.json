@@ -23,7 +23,7 @@
     "duracion": {
       "type": "decimal"
     },
-    "nombreEjercicio": {
+    "ejercicio": {
       "type": "string"
     },
     "alimento": {
