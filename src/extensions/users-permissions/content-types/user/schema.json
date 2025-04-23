@@ -71,7 +71,7 @@
       "target": "api::alimento.alimento",
       "mappedBy": "user"
     },
-    "dato_usuarios": {
+    "usuarios": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::usuario.usuario",
@@ -93,13 +93,13 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::rutina.rutina",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "user"
     },
     "calculadoras": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::calculadora.calculadora",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "user"
     }
   }
 }

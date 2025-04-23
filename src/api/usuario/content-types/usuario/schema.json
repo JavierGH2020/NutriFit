@@ -4,7 +4,7 @@
   "info": {
     "singularName": "usuario",
     "pluralName": "usuarios",
-    "displayName": "DatoUsuario",
+    "displayName": "datoUsuario",
     "description": "Datos adicionales del usuario"
   },
   "options": {
@@ -44,7 +44,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "dato_usuarios"
+      "inversedBy": "usuarios"
     }
   }
 }

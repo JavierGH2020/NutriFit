@@ -654,7 +654,7 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   collectionName: 'usuarios';
   info: {
     description: 'Datos adicionales del usuario';
-    displayName: 'DatoUsuario';
+    displayName: 'datoUsuario';
     pluralName: 'usuarios';
     singularName: 'usuario';
   };
@@ -1161,10 +1161,6 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    dato_usuarios: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::usuario.usuario'
-    >;
     ejercicios: Schema.Attribute.Relation<
       'oneToMany',
       'api::ejercicio.ejercicio'
@@ -1204,6 +1200,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    usuarios: Schema.Attribute.Relation<'oneToMany', 'api::usuario.usuario'>;
   };
 }
 
