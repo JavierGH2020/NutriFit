@@ -6,7 +6,7 @@ export default [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ["https://nutrifit-p0z5.onrender.com"], // Agrega tu dominio en producción
+      origin: ["http://localhost:3000"], // Agrega tu dominio en producción
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
       credentials: true, // Habilita el uso de cookies y sesiones
