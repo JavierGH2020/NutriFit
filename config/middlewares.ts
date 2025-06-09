@@ -5,8 +5,7 @@ export default [
   {
     name: "strapi::cors",
     config: {
-      enabled: true,
-      origin: ["https://nutrifit-three.vercel.app/"],
+      origin: ["https://nutrifit-three.vercel.app"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
       credentials: true,
@@ -17,5 +16,5 @@ export default [
   "strapi::body",
   "strapi::session",
   "strapi::favicon",
-  "strapi::public"
+  "strapi::public",
 ];
