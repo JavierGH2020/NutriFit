@@ -6,10 +6,10 @@ export default [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ["https://nutrifit-three.vercel.app/"], // Agrega tu dominio en producción
+      origin: ["http://localhost:3000"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
-      credentials: true, // Habilita el uso de cookies y sesiones
+      credentials: true,
     },
   },
   "strapi::poweredBy",
