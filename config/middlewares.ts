@@ -6,7 +6,7 @@ export default [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ["http://localhost:3000"],
+      origin: ["https://nutrifit-three.vercel.app/"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization"],
       credentials: true,
